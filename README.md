@@ -28,6 +28,7 @@
 
 - Technical requirements
     - Developed using mainly Ruby and Javascript.
+    - Implement the design that is present inside the assets folder (HTML + CSS)
 
 - Evaluation Criteria
     - you create maintainable code;
