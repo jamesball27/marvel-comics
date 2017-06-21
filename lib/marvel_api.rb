@@ -4,7 +4,7 @@ class MarvelApi
   include HTTParty
   BASE_URL = "http://gateway.marvel.com/"
 
-  def self.get_comics
+  def self.get_comics(offset)
     url = BASE_URL + "/v1/public/comics"
     md5 = Digest::MD5.new
     timestamp = Time.now.to_i.to_s
@@ -13,6 +13,7 @@ class MarvelApi
       formatType: "comic",
       noVariants: "true",
       limit: "10",
+      offset: offset.to_i * 10,
       orderBy: "-focDate",
       apikey: ENV["marvel_api_public_key"],
       ts: timestamp,

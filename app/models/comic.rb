@@ -1,7 +1,7 @@
 class Comic
 
-  def self.all
-    comics = MarvelApi.get_comics
+  def self.next_ten_comics(offset)
+    comics = MarvelApi.get_comics(offset)
     comics["data"]["results"].map do |comic|
       id, title, image = comic["id"], comic["title"], comic["images"][0]
       image_url = image.nil? ? nil : image["path"] + "/portrait_uncanny." + image["extension"]
@@ -16,4 +16,5 @@ class Comic
     @title = title
     @image_url = image_url
   end
+
 end

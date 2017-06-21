@@ -8,19 +8,30 @@ class ComicsIndex extends React.Component {
     super(props);
 
     this.state = { pageLoads: 0 };
+
+    this.loadMoreComics = this.loadMoreComics.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchComics(this.state.pageLoads);
   }
 
+  loadMoreComics() {
+    const pageLoads = this.state.pageLoads + 1;
+    this.props.fetchComics(pageLoads)
+      .then(this.setState({ pageLoads }));
+  }
+
   render() {
     return(
-      <ul>
-        {
-          this.props.comics.map(comic => <li>{comic.title}</li>)
-        }
-      </ul>
+      <div>
+        <ul>
+          {
+            this.props.comics.map(comic => <li>{comic.title}</li>)
+          }
+        </ul>
+        <button onClick={ this.loadMoreComics }>Load More Comics</button>
+      </div>
     );
   }
 }
