@@ -1,6 +1,5 @@
-@comics.each do |comic|
-  json.set! comic.id do
-    json.title comic.title
-    json.imageUrl comic.image_url
-  end
+json.array! @comics do |comic|
+  json.id comic.id
+  json.title comic.title
+  json.imageUrl comic.image_url
 end

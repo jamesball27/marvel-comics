@@ -8,12 +8,14 @@ class MarvelApi
     url = BASE_URL + "/v1/public/comics"
     md5 = Digest::MD5.new
     timestamp = Time.now.to_i.to_s
+
     params = {
       format: "comic",
       formatType: "comic",
       noVariants: "true",
+      hasDigitalIssue: "false",
       limit: "10",
-      offset: offset.to_i * 10,
+      offset: (offset.to_i * 10).to_s,
       orderBy: "-focDate",
       apikey: ENV["marvel_api_public_key"],
       ts: timestamp,

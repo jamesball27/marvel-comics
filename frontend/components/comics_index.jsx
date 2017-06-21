@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchComics } from '../actions/comic_actions';
 import { arrayAllComics } from '../reducers/selectors';
+import ComicsIndexItem from './comics_index_item';
 
 class ComicsIndex extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class ComicsIndex extends React.Component {
       <div>
         <ul>
           {
-            this.props.comics.map(comic => <li>{comic.title}</li>)
+            this.props.comics.map((comic, i) => <ComicsIndexItem comic={ comic } key={ i } />)
           }
         </ul>
         <button onClick={ this.loadMoreComics }>Load More Comics</button>
@@ -37,7 +38,7 @@ class ComicsIndex extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  comics: arrayAllComics(state)
+  comics: state.comics
 });
 
 const mapDispatchToProps = dispatch => ({
