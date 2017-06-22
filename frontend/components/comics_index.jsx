@@ -41,7 +41,7 @@ class ComicsIndex extends React.Component {
           }
         </ul>
         { this.renderSpinner() }
-        <button onClick={ this.loadMoreComics }>Load More Comics</button>
+        <button onClick={ this.loadMoreComics } className="load-comics-btn">Load More Comics</button>
       </div>
     );
   }

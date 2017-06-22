@@ -17,6 +17,7 @@
   margin: 10px;
   position: relative;
   box-shadow: 2px 2px 2px 2px #ccc;
+  cursor: pointer;
 
   .overlay {
     background: black;
@@ -28,9 +29,13 @@
     outline: 10px solid #db3c32;
   }
 
-  img:hover {
-    background: black;
-    opacity: 0.4;
+  img {
+    transition: opacity .25s;
+
+    &:hover {
+      background: black;
+      opacity: 0.4;
+    }
   }
 
   .comic-title {
