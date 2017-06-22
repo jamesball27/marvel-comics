@@ -11,6 +11,7 @@ class ComicsIndex extends React.Component {
     this.state = { pageLoads: 0 };
 
     this.loadMoreComics = this.loadMoreComics.bind(this);
+    this.renderSpinner = this.renderSpinner.bind(this);
   }
 
   componentWillMount() {
@@ -23,6 +24,14 @@ class ComicsIndex extends React.Component {
       .then(this.setState({ pageLoads }));
   }
 
+  renderSpinner() {
+    if (this.props.fetching) {
+      return(
+        <div className="spinner"></div>
+      );
+    }
+  }
+
   render() {
     return(
       <div className="comics">
@@ -31,6 +40,7 @@ class ComicsIndex extends React.Component {
             this.props.comics.map((comic, i) => <ComicsIndexItem comic={ comic } key={ i } />)
           }
         </ul>
+        { this.renderSpinner() }
         <button onClick={ this.loadMoreComics }>Load More Comics</button>
       </div>
     );
@@ -38,7 +48,8 @@ class ComicsIndex extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  comics: state.comics
+  comics: state.comics,
+  fetching: state.fetching
 });
 
 const mapDispatchToProps = dispatch => ({
