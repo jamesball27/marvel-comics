@@ -7,7 +7,12 @@ class App extends React.Component {
   render() {
     return(
       <Provider store={ this.props.store } >
-        <ComicsIndex />
+        <div>
+          <header className="header">
+            <img src={ window.images.marvel } />
+          </header>
+          <ComicsIndex />
+        </div>
       </Provider>
     );
   }

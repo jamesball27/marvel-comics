@@ -1,0 +1,45 @@
+.comics {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.comics-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.comics-index-item {
+  height: 100%;
+  margin: 10px;
+  position: relative;
+  box-shadow: 2px 2px 2px 2px #ccc;
+
+  .overlay {
+    background: black;
+    height: 450px;
+    width: 300px;
+  }
+
+  &:hover {
+    outline: 10px solid #db3c32;
+  }
+
+  img:hover {
+    background: black;
+    opacity: 0.4;
+  }
+
+  .comic-title {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 18px;
+    padding: 5px;
+    color: white;
+    pointer-events: none;
+  }
+}

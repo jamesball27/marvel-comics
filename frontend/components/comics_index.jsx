@@ -25,8 +25,8 @@ class ComicsIndex extends React.Component {
 
   render() {
     return(
-      <div>
-        <ul>
+      <div className="comics">
+        <ul className="comics-index">
           {
             this.props.comics.map((comic, i) => <ComicsIndexItem comic={ comic } key={ i } />)
           }
