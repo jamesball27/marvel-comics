@@ -7,8 +7,8 @@ const receiveComics = comics => ({
   comics
 });
 
-export const fetchComics = offsetCount => dispatch => {
+export const fetchComics = offset => dispatch => {
   dispatch({ type: 'FETCHING' });
-  return ComicsApiUtil.fetchComics(offsetCount)
+  return ComicsApiUtil.fetchComics(offset)
     .then(comics => dispatch(receiveComics(comics)));
 };
