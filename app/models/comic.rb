@@ -1,7 +1,7 @@
 class Comic
 
-  def self.next_ten_comics(offset)
-    comics = MarvelApi.get_comics(offset)
+  def self.next_ten_comics(offset, character_id = nil)
+    comics = MarvelApi.get_comics(offset, character_id)
 
     comics.map do |comic|
       id, title, image = comic["id"], comic["title"], comic["images"].first

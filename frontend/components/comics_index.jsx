@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchComics } from '../actions/comic_actions';
-import { arrayAllComics } from '../reducers/selectors';
+import { fetchComics, clearComics } from '../actions/comic_actions';
 import ComicsIndexItem from './comics_index_item';
 
 class ComicsIndex extends React.Component {
@@ -16,6 +15,14 @@ class ComicsIndex extends React.Component {
 
   componentWillMount() {
     this.props.fetchComics(this.state.pageLoads);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.characterSearch === null && newProps.characterSearch) {
+      this.setState({ pageLoads: 0 });
+      this.props.clearComics();
+      this.props.fetchComics(this.state.pageLoads, newProps.characterSearch);
+    }
   }
 
   loadMoreComics() {
@@ -49,11 +56,13 @@ class ComicsIndex extends React.Component {
 
 const mapStateToProps = state => ({
   comics: state.comics,
-  fetching: state.fetching
+  fetching: state.fetching,
+  characterSearch: state.characterSearch
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchComics: offsetCount => dispatch(fetchComics(offsetCount))
+  fetchComics: (offsetCount, searchTerm) => dispatch(fetchComics(offsetCount, searchTerm)),
+  clearComics: () => dispatch(clearComics())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComicsIndex);

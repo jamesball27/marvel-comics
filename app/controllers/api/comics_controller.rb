@@ -2,6 +2,7 @@ class Api::ComicsController < ApplicationController
 
   def index
     offset, search_term = comic_params[:offset], comic_params[:search_term]
+
     if search_term
       @comics = Comic.comics_by_character(offset, search_term)
     else
