@@ -25,6 +25,7 @@ class CharacterSearch extends React.Component {
 
   clearSearch() {
     this.props.receiveSearchTerm(null);
+    this.setState({ searchTerm: '' });
   }
 
   render() {
@@ -37,6 +38,7 @@ class CharacterSearch extends React.Component {
             type="text"
             placeholder={ placeholder }
             onChange={ this.handleInput }
+            value={ this.state.searchTerm }
             />
         </form>
         <button onClick={ this.clearSearch }>Clear Search</button>

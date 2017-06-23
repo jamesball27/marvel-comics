@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchComics, clearComics } from '../actions/comic_actions';
 import ComicsIndexItem from './comics_index_item';
+import { receiveSearchTerm } from '../actions/character_search_actions';
 
 class ComicsIndex extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class ComicsIndex extends React.Component {
 
     this.loadMoreComics = this.loadMoreComics.bind(this);
     this.renderSpinner = this.renderSpinner.bind(this);
+    this.renderNoResults = this.renderNoResults.bind(this);
   }
 
   componentWillMount() {
@@ -18,8 +20,7 @@ class ComicsIndex extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if ((this.props.characterSearch === null && newProps.characterSearch) ||
-        (this.props.characterSearch && newProps.characterSearch === null)) {
+    if ((this.props.characterSearch !== newProps.characterSearch)) {
       this.setState({ pageLoads: 0 });
       this.props.clearComics();
       this.props.fetchComics(this.state.pageLoads, newProps.characterSearch);
@@ -41,6 +42,14 @@ class ComicsIndex extends React.Component {
   }
 
   render() {
+    if (this.props.comics.length === 0 && !this.props.fetching) {
+      return(
+        <div className="comics">
+          <h2>No results found. Check the spelling of the character name.</h2>
+        </div>
+      );
+    }
+
     return(
       <div className="comics">
         <ul className="comics-index">
@@ -53,7 +62,7 @@ class ComicsIndex extends React.Component {
           onClick={ this.loadMoreComics }
           className="load-comics-btn"
         >
-          Load More { this.props.characterSearch} Comics
+          Load More { this.props.characterSearch } Comics
         </button>
       </div>
     );

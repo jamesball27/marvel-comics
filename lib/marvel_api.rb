@@ -45,7 +45,8 @@ class MarvelApi
     }
 
     response = JSON.parse get(url, query: params).to_s
-    response["data"]["results"].first["id"]
+    results = response["data"]["results"]
+    results.empty? ? nil : results.first["id"]
   end
 
 end

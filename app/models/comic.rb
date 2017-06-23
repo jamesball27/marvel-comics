@@ -12,7 +12,8 @@ class Comic
 
   def self.comics_by_character(offset, search_term)
     character_id = MarvelApi.get_character_id(search_term)
-
+    
+    return [] if character_id.nil?
     Comic.next_ten_comics(offset, character_id)
   end
 
