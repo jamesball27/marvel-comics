@@ -18,7 +18,8 @@ class ComicsIndex extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.props.characterSearch === null && newProps.characterSearch) {
+    if ((this.props.characterSearch === null && newProps.characterSearch) ||
+        (this.props.characterSearch && newProps.characterSearch === null)) {
       this.setState({ pageLoads: 0 });
       this.props.clearComics();
       this.props.fetchComics(this.state.pageLoads, newProps.characterSearch);
@@ -27,7 +28,7 @@ class ComicsIndex extends React.Component {
 
   loadMoreComics() {
     const pageLoads = this.state.pageLoads + 1;
-    this.props.fetchComics(pageLoads)
+    this.props.fetchComics(pageLoads, this.props.characterSearch)
       .then(this.setState({ pageLoads }));
   }
 
@@ -48,7 +49,12 @@ class ComicsIndex extends React.Component {
           }
         </ul>
         { this.renderSpinner() }
-        <button onClick={ this.loadMoreComics } className="load-comics-btn">Load More Comics</button>
+        <button
+          onClick={ this.loadMoreComics }
+          className="load-comics-btn"
+        >
+          Load More { this.props.characterSearch} Comics
+        </button>
       </div>
     );
   }

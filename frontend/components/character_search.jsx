@@ -10,6 +10,7 @@ class CharacterSearch extends React.Component {
 
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   handleInput(e) {
@@ -22,17 +23,24 @@ class CharacterSearch extends React.Component {
     this.props.receiveSearchTerm(this.state.searchTerm);
   }
 
+  clearSearch() {
+    this.props.receiveSearchTerm(null);
+  }
+
   render() {
     const placeholder = "Search for comics by character";
 
     return(
-      <form onSubmit={ this.handleSubmit }>
-        <input
-          type="text"
-          placeholder={ placeholder }
-          onChange={ this.handleInput }
-        />
-      </form>
+      <div>
+        <form onSubmit={ this.handleSubmit }>
+          <input
+            type="text"
+            placeholder={ placeholder }
+            onChange={ this.handleInput }
+            />
+        </form>
+        <button onClick={ this.clearSearch }>Clear Search</button>
+      </div>
     );
   }
 }
