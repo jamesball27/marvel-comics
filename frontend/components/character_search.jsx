@@ -32,7 +32,7 @@ class CharacterSearch extends React.Component {
     const placeholder = "Search for comics by character";
 
     return(
-      <div>
+      <div className="character-search">
         <form onSubmit={ this.handleSubmit }>
           <input
             type="text"
@@ -41,7 +41,7 @@ class CharacterSearch extends React.Component {
             value={ this.state.searchTerm }
             />
         </form>
-        <button onClick={ this.clearSearch }>Clear Search</button>
+        <button onClick={ this.clearSearch }>Show All Comics</button>
       </div>
     );
   }

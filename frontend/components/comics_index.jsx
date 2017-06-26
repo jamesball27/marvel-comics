@@ -12,7 +12,7 @@ class ComicsIndex extends React.Component {
 
     this.loadMoreComics = this.loadMoreComics.bind(this);
     this.renderSpinner = this.renderSpinner.bind(this);
-    this.renderNoResults = this.renderNoResults.bind(this);
+    this.renderNowShowingText = this.renderNowShowingText.bind(this);
   }
 
   componentWillMount() {
@@ -41,6 +41,19 @@ class ComicsIndex extends React.Component {
     }
   }
 
+  renderNowShowingText() {
+    if (!this.props.fetching) {
+      let nowShowingText = 'all';
+      if (this.props.characterSearch) {
+        nowShowingText = this.props.characterSearch;
+      }
+
+      return(
+        <h4>Showing: { nowShowingText } comics</h4>
+      );
+    }
+  }
+
   render() {
     if (this.props.comics.length === 0 && !this.props.fetching) {
       return(
@@ -50,8 +63,11 @@ class ComicsIndex extends React.Component {
       );
     }
 
+
+
     return(
       <div className="comics">
+        { this.renderNowShowingText() }
         <ul className="comics-index">
           {
             this.props.comics.map((comic, i) => <ComicsIndexItem comic={ comic } key={ i } />)
