@@ -1,4 +1,4 @@
-require '/lib/marvel_api.rb'
+require_relative '../../lib/marvel_api.rb'
 
 class Comic
 
