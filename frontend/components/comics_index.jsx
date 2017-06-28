@@ -14,6 +14,7 @@ class ComicsIndex extends React.Component {
     this.loadMoreComics = this.loadMoreComics.bind(this);
     this.renderSpinner = this.renderSpinner.bind(this);
     this.renderNowShowingText = this.renderNowShowingText.bind(this);
+    this.renderLoadButton = this.renderLoadButton.bind(this);
   }
 
   componentWillMount() {
@@ -57,6 +58,19 @@ class ComicsIndex extends React.Component {
     }
   }
 
+  renderLoadButton() {
+    if (!this.props.fetching) {
+      return(
+        <button
+          onClick={ this.loadMoreComics }
+          className="load-comics-btn"
+        >
+          Load More { this.props.characterSearch } Comics
+        </button>
+      );
+    }
+  }
+
   render() {
     if (this.props.comics.length === 0 && !this.props.fetching) {
       return(
@@ -83,12 +97,7 @@ class ComicsIndex extends React.Component {
           }
         </ul>
         { this.renderSpinner() }
-        <button
-          onClick={ this.loadMoreComics }
-          className="load-comics-btn"
-        >
-          Load More { this.props.characterSearch } Comics
-        </button>
+        { this.renderLoadButton() }
       </div>
     );
   }
