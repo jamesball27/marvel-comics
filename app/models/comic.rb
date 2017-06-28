@@ -1,4 +1,3 @@
-require 'marvel_api.rb'
 
 class Comic
 
