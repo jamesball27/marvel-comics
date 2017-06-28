@@ -1,6 +1,6 @@
 import React from 'react';
-import { receiveSearchTerm } from '../actions/character_search_actions';
 import { connect } from 'react-redux';
+import { receiveSearchTerm } from '../actions/character_search_actions';
 
 class CharacterSearch extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class CharacterSearch extends React.Component {
             placeholder={ placeholder }
             onChange={ this.handleInput }
             value={ this.state.searchTerm }
-            />
+          />
         </form>
         <button onClick={ this.clearSearch }>Show All Comics</button>
       </div>

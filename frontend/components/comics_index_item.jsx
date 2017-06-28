@@ -11,7 +11,6 @@ class ComicsIndexItem extends React.Component {
     this.removeHover = this.removeHover.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
     this.renderHeart = this.renderHeart.bind(this);
-
   }
 
   setHover() {

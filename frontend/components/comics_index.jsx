@@ -1,9 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchComics, clearComics } from '../actions/comic_actions';
-import ComicsIndexItem from './comics_index_item';
 import { receiveSearchTerm } from '../actions/character_search_actions';
 import { fetchFavorites, createFavorite, deleteFavorite } from '../actions/favorite_actions';
+import ComicsIndexItem from './comics_index_item';
+
+const mapStateToProps = state => ({
+  comics: state.comics,
+  fetching: state.fetching,
+  characterSearch: state.characterSearch,
+  favorites: state.favorites
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchComics: (offsetCount, searchTerm) => dispatch(fetchComics(offsetCount, searchTerm)),
+  clearComics: () => dispatch(clearComics()),
+  fetchFavorites: () => dispatch(fetchFavorites()),
+  createFavorite: comicId => dispatch(createFavorite(comicId)),
+  deleteFavorite: comicId => dispatch(deleteFavorite(comicId)),
+});
 
 class ComicsIndex extends React.Component {
   constructor(props) {
@@ -102,20 +117,5 @@ class ComicsIndex extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  comics: state.comics,
-  fetching: state.fetching,
-  characterSearch: state.characterSearch,
-  favorites: state.favorites
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchComics: (offsetCount, searchTerm) => dispatch(fetchComics(offsetCount, searchTerm)),
-  clearComics: () => dispatch(clearComics()),
-  fetchFavorites: () => dispatch(fetchFavorites()),
-  createFavorite: comicId => dispatch(createFavorite(comicId)),
-  deleteFavorite: comicId => dispatch(deleteFavorite(comicId)),
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComicsIndex);
