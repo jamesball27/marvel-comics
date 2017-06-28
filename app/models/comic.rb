@@ -1,3 +1,5 @@
+require '/lib/marvel_api.rb'
+
 class Comic
 
   def self.next_ten_comics(offset, character_id = nil)
