@@ -10,6 +10,8 @@ class ComicsIndexItem extends React.Component {
     this.setHover = this.setHover.bind(this);
     this.removeHover = this.removeHover.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
+    this.renderHeart = this.renderHeart.bind(this);
+
   }
 
   setHover() {
@@ -28,6 +30,19 @@ class ComicsIndexItem extends React.Component {
     }
   }
 
+  renderHeart() {
+    let path = window.images.heartOff;
+    if (this.props.favorited) {
+      path = window.images.heartOn;
+    } else if (this.state.hovered) {
+      path = window.images.heartHover;
+    }
+
+    return(
+      <img src={ path } className="heart" />
+    );
+  }
+
   toggleFavorite() {
     if (this.props.favorited) {
       this.props.deleteFavorite(this.props.comic.id);
@@ -37,17 +52,21 @@ class ComicsIndexItem extends React.Component {
   }
 
   render() {
+    const outline = { outline: '10px solid #db3c32' };
+
     return(
       <li
         className="comics-index-item"
         onMouseOver={ this.setHover }
         onMouseLeave={ this.removeHover }
         onClick={ this.toggleFavorite }
+        style={ this.props.favorited ? outline : {} }
       >
         <div className="overlay">
           <img src={ this.props.comic.imageUrl } />
           { this.renderTitle() }
         </div>
+        { this.renderHeart() }
       </li>
     );
   }

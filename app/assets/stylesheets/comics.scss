@@ -18,7 +18,7 @@
 
 .comics-index-item {
   height: 100%;
-  margin: 10px;
+  margin: 20px;
   position: relative;
   box-shadow: 2px 2px 2px 2px #ccc;
   cursor: pointer;
@@ -37,7 +37,6 @@
     transition: opacity .25s;
 
     &:hover {
-      background: black;
       opacity: 0.4;
     }
   }
@@ -49,6 +48,16 @@
     font-size: 18px;
     padding: 5px;
     color: white;
+    pointer-events: none;
+  }
+
+  .heart {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 25px;
+    width: 25px;
     pointer-events: none;
   }
 }
