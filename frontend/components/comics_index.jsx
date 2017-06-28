@@ -23,9 +23,10 @@ class ComicsIndex extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if ((this.props.characterSearch !== newProps.characterSearch)) {
-      this.setState({ pageLoads: 0 });
+      const pageLoads = 0;
       this.props.clearComics();
-      this.props.fetchComics(this.state.pageLoads, newProps.characterSearch);
+      this.props.fetchComics(pageLoads, newProps.characterSearch);
+      this.setState({ pageLoads });
     }
   }
 

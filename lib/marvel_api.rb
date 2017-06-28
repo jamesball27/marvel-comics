@@ -13,9 +13,7 @@ class MarvelApi
     url = BASE_URL + "/comics"
 
     params = {
-      format: "comic",
       formatType: "comic",
-      noVariants: "true",
       hasDigitalIssue: "false",
       limit: "10",
       offset: (offset.to_i * 10).to_s,
