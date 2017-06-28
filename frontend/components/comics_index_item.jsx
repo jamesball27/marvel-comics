@@ -9,6 +9,7 @@ class ComicsIndexItem extends React.Component {
     this.renderTitle = this.renderTitle.bind(this);
     this.setHover = this.setHover.bind(this);
     this.removeHover = this.removeHover.bind(this);
+    this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
   setHover() {
@@ -27,12 +28,21 @@ class ComicsIndexItem extends React.Component {
     }
   }
 
+  toggleFavorite() {
+    if (this.props.favorited) {
+      this.props.deleteFavorite(this.props.comic.id);
+    } else {
+      this.props.createFavorite(this.props.comic.id);
+    }
+  }
+
   render() {
     return(
       <li
         className="comics-index-item"
         onMouseOver={ this.setHover }
         onMouseLeave={ this.removeHover }
+        onClick={ this.toggleFavorite }
       >
         <div className="overlay">
           <img src={ this.props.comic.imageUrl } />

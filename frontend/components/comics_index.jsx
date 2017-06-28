@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchComics, clearComics } from '../actions/comic_actions';
 import ComicsIndexItem from './comics_index_item';
 import { receiveSearchTerm } from '../actions/character_search_actions';
+import { fetchFavorites, createFavorite, deleteFavorite } from '../actions/favorite_actions';
 
 class ComicsIndex extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class ComicsIndex extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchComics(this.state.pageLoads);
+    this.props.fetchComics(this.state.pageLoads)
+      .then(this.props.fetchFavorites());
   }
 
   componentWillReceiveProps(newProps) {
@@ -63,14 +65,20 @@ class ComicsIndex extends React.Component {
       );
     }
 
-
-
     return(
       <div className="comics">
         { this.renderNowShowingText() }
         <ul className="comics-index">
           {
-            this.props.comics.map((comic, i) => <ComicsIndexItem comic={ comic } key={ i } />)
+            this.props.comics.map((comic, i) => (
+              <ComicsIndexItem
+                key={ i }
+                comic={ comic }
+                favorited={ this.props.favorites.includes(comic.id) }
+                createFavorite={ this.props.createFavorite }
+                deleteFavorite={ this.props.deleteFavorite }
+              />
+            ))
           }
         </ul>
         { this.renderSpinner() }
@@ -88,12 +96,16 @@ class ComicsIndex extends React.Component {
 const mapStateToProps = state => ({
   comics: state.comics,
   fetching: state.fetching,
-  characterSearch: state.characterSearch
+  characterSearch: state.characterSearch,
+  favorites: state.favorites
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchComics: (offsetCount, searchTerm) => dispatch(fetchComics(offsetCount, searchTerm)),
-  clearComics: () => dispatch(clearComics())
+  clearComics: () => dispatch(clearComics()),
+  fetchFavorites: () => dispatch(fetchFavorites()),
+  createFavorite: comicId => dispatch(createFavorite(comicId)),
+  deleteFavorite: comicId => dispatch(deleteFavorite(comicId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComicsIndex);
